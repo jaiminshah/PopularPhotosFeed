@@ -1,6 +1,7 @@
 package com.codepath.jaiminshah.popularphotosfeed;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +10,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.makeramen.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 import java.util.ArrayList;
 
@@ -46,8 +49,19 @@ public class InstagramPhotoAdapter extends ArrayAdapter<InstagramPhoto> {
         // Reset the image from the recycled view
         viewHolder.cimgUser.setImageResource(0);
         if (photo.userImgUrl != null) {
+            Transformation transformation = new RoundedTransformationBuilder()
+                    .borderColor(Color.LTGRAY)
+                    .borderWidthDp(1)
+                    .cornerRadiusDp(30)
+                    .oval(false)
+                    .build();
+
             // fetch the profile picture for the user
-            Picasso.with(getContext()).load(photo.userImgUrl).into(viewHolder.cimgUser);
+            Picasso.with(getContext())
+                    .load(photo.userImgUrl)
+                    .fit()
+                    .transform(transformation)
+                    .into(viewHolder.cimgUser);
         }
         // Set the height of the image view to be same the screen width as a placeholder.
         // Instagram images seems to be all squares

@@ -17,8 +17,6 @@ Spent quite some time trying to figure out how to display location based on lati
 in the photo. Its puzzling that why its not working. Geocoder is always returning no address with
 valid lat/long.
 
-Will be adding circular profile pictures and captions next. 
-
 Walkthrough of all user stories:
 
 ![Video Walkthrough](PopularPhotosFeed.gif)

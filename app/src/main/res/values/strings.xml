@@ -4,5 +4,8 @@
     <string name="app_name">Popular Photos Feed</string>
     <string name="action_settings">Settings</string>
     <string name="caption_default_text">This is default caption</string>
+    <string name="likes_default_text">## Likes</string>
+    <string name="username_default_Text">Username</string>
+    <string name="locality_default_text">Locality</string>
 
 </resources>

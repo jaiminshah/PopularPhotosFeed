@@ -1,9 +1,7 @@
 package com.codepath.jaiminshah.popularphotosfeed;
 
 import android.content.Context;
-import android.content.res.Configuration;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +9,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.pkmmte.view.CircularImageView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -20,15 +17,6 @@ import java.util.ArrayList;
  * Created by jaimins on 9/12/14.
  */
 public class InstagramPhotoAdapter extends ArrayAdapter<InstagramPhoto> {
-    //View lookup Cache
-    private static class ViewHolder{
-        TextView tvUsername;
-        ImageView cimgUser;
-        ImageView imgPhoto;
-        TextView tvCaption;
-
-    }
-
     public InstagramPhotoAdapter(Context context, ArrayList<InstagramPhoto> objects) {
         super(context, android.R.layout.simple_list_item_1, objects);
     }
@@ -38,16 +26,18 @@ public class InstagramPhotoAdapter extends ArrayAdapter<InstagramPhoto> {
         InstagramPhoto photo = getItem(position);
 
         ViewHolder viewHolder;
-        if (convertView == null){
+        if (convertView == null) {
             viewHolder = new ViewHolder();
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_photo, parent,false);
-            viewHolder.tvUsername   = (TextView) convertView.findViewById(R.id.tvUsername);
-            viewHolder.cimgUser     = (ImageView) convertView.findViewById(R.id.cimgUser);
-            viewHolder.imgPhoto     = (ImageView) convertView.findViewById(R.id.imgPhoto);
-            viewHolder.tvCaption    = (TextView) convertView.findViewById(R.id.tvCaption);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_photo, parent, false);
+            viewHolder.tvUsername = (TextView) convertView.findViewById(R.id.tvUsername);
+            viewHolder.cimgUser = (ImageView) convertView.findViewById(R.id.cimgUser);
+            viewHolder.imgPhoto = (ImageView) convertView.findViewById(R.id.imgPhoto);
+            viewHolder.tvCaption = (TextView) convertView.findViewById(R.id.tvCaption);
+            viewHolder.tvLikes = (TextView) convertView.findViewById(R.id.tvLikes);
+            viewHolder.tvLocality = (TextView) convertView.findViewById(R.id.tvLocality);
+            viewHolder.imgLocation = (ImageView) convertView.findViewById(R.id.imgLocation);
             convertView.setTag(viewHolder);
-        }
-        else{
+        } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         // Set the Username text
@@ -68,9 +58,30 @@ public class InstagramPhotoAdapter extends ArrayAdapter<InstagramPhoto> {
         viewHolder.imgPhoto.setImageResource(0);
         Picasso.with(getContext()).load(photo.imageUrl).into(viewHolder.imgPhoto);
 
+        //Set number of likes
+        viewHolder.tvLikes.setText(Integer.toString(photo.likesCount));
+
+        if (photo.locality.equals("Unknown")) {
+            viewHolder.imgLocation.setVisibility(View.GONE);
+            viewHolder.tvLocality.setVisibility(View.GONE);
+        } else {
+            viewHolder.tvLocality.setText(photo.locality);
+        }
+
         // Set the caption for the photo
-        viewHolder.tvCaption.setText(photo.caption);
+        viewHolder.tvCaption.setText(photo.getFormattedCaption());
 
         return convertView;
+    }
+
+    //View lookup Cache
+    private static class ViewHolder {
+        TextView tvUsername;
+        ImageView cimgUser;
+        ImageView imgPhoto;
+        TextView tvLikes;
+        TextView tvCaption;
+        TextView tvLocality;
+        ImageView imgLocation;
     }
 }

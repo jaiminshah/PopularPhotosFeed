@@ -1,32 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/ic_launcher"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:id="@+id/cimgUser" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvUsername"
-            android:text="@string/caption_default_text"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/cimgUser"
-            android:layout_toEndOf="@+id/cimgUser" />
-    </RelativeLayout>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -34,19 +11,97 @@
         android:id="@+id/imgPhoto"
         android:scaleType="fitStart"
         android:adjustViewBounds="true"
-        android:src="@drawable/ic_launcher" />
+        android:src="@drawable/ic_launcher"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="@color/translucent_white"
+        android:padding="3dp"
+        android:id="@+id/relativeLayout">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_launcher"
+            android:id="@+id/cimgUser" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvUsername"
+            android:text="@string/username_default_Text"
+            android:textColor="@color/ig_blue"
+            android:textStyle="bold"
+            android:layout_marginLeft="5dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/cimgUser"
+            android:layout_toEndOf="@+id/cimgUser" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/locality_default_text"
+            android:id="@+id/tvLocality"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="10dp"/>
+
+        <ImageView
+            android:layout_width="@dimen/icon_width"
+            android:layout_height="@dimen/icon_height"
+            android:id="@+id/imgLocation"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/tvLocality"
+            android:layout_toStartOf="@+id/tvLocality"
+            android:src="@drawable/ic_location"/>
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:layout_below="@+id/imgPhoto"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/icon_width"
+            android:layout_height="@dimen/icon_height"
+            android:src="@drawable/ic_likes"
+            android:layout_marginRight="5dp"/>
+
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:maxLines="3"
-            android:ellipsize="end"
-            android:id="@+id/tvCaption"
-            android:text="@string/caption_default_text" />
+            android:layout_height="match_parent"
+            android:text="@string/likes_default_text"
+            android:textColor="@color/ig_blue"
+            android:gravity="center"
+            android:id="@+id/tvLikes"/>
     </LinearLayout>
 
-</LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="3"
+        android:ellipsize="end"
+        android:id="@+id/tvCaption"
+        android:textSize="13sp"
+        android:text="@string/caption_default_text"
+        />
+    </LinearLayout>
+</RelativeLayout>

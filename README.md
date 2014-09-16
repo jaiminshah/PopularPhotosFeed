@@ -10,12 +10,9 @@ Completed user stories:
                 - (Optional) display like count, user profile image
  * [x] Optional: Add pull-to-refresh for popular stream with SwipeRefreshLayout
  * [x] Optional: Update the image to be displayed with the same proportions as on Instagram
+ * [x] Optional: Show latest comment for each photo 
 
 Notes:
-
-Spent quite some time trying to figure out how to display location based on latitude and longtitude
-in the photo. Its puzzling that why its not working. Geocoder is always returning no address with
-valid lat/long.
 
 Walkthrough of all user stories:
 

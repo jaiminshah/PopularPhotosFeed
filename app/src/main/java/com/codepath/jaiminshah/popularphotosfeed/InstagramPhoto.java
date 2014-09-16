@@ -10,10 +10,12 @@ import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -30,7 +32,9 @@ public class InstagramPhoto {
     public int likesCount;
     public double latitude;
     public double longitude;
+    public long created_time;
     public String locality = "Unknown";
+    public ArrayList<Comment> comments = new ArrayList<Comment>();
 
     public InstagramPhoto(JSONObject photoJSON) {
         try {
@@ -57,6 +61,19 @@ public class InstagramPhoto {
                 if (photoJSON.getJSONObject("location").has("name")) {
                     this.locality = photoJSON.getJSONObject("location").getString("name");
                 }
+            }
+            if (!photoJSON.isNull("created_time")) {
+                this.created_time = photoJSON.getLong("created_time");
+            }
+            if (!photoJSON.isNull("comments")) {
+                JSONArray commentsJSON = null;
+                commentsJSON = photoJSON.getJSONObject("comments").getJSONArray("data");
+                for (int i = 0; i < commentsJSON.length() && i < 2; ++i) {
+                    JSONObject commentJSON = commentsJSON.getJSONObject(i);
+                    Comment comment = new Comment(commentJSON);
+                    comments.add(comment);
+                }
+
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -87,4 +104,5 @@ public class InstagramPhoto {
 
         return text;
     }
+
 }

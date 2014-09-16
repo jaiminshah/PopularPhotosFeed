@@ -3,7 +3,8 @@
     <color name="opaque_red">#f00</color>
     <color name="translucent_white">#80ffffff</color>
     <color name="translucent_blue">#80d5fffd</color>
-    <color name="light_white">#fff5f5f5</color>
+    <color name="light_white">#ffededed</color>
+    <color name="dark_grey">#ff515151</color>
 
     <color name="ig_blue">#FF3F729B</color>
     <color name="blue02">#079DD0</color>

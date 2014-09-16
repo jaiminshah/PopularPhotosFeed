@@ -52,7 +52,6 @@ public class PhotosActivity extends Activity implements OnRefreshListener {
         photos = new ArrayList<InstagramPhoto>();
 
         aPhotos = new InstagramPhotoAdapter(this, photos);
-
         ListView lvPhotos = (ListView) findViewById(R.id.lvPhotos);
         lvPhotos.setAdapter(aPhotos);
 
@@ -73,7 +72,7 @@ public class PhotosActivity extends Activity implements OnRefreshListener {
                     for (int i = 0; i < photosJSON.length(); ++i) {
                         JSONObject photoJSON = photosJSON.getJSONObject(i);
                         InstagramPhoto photo = new InstagramPhoto(photoJSON);
-                        photo.setLocality(getBaseContext());
+//                        photo.setLocality(getBaseContext());
                         photos.add(photo);
                     }
                     aPhotos.notifyDataSetChanged();

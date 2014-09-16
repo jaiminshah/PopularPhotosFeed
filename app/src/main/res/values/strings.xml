@@ -7,5 +7,7 @@
     <string name="likes_default_text">## Likes</string>
     <string name="username_default_Text">Username</string>
     <string name="locality_default_text">Locality</string>
+    <string name="timeelapsed_default_text">2w</string>
+    <string name="comment_default_text">I sponsor an orphanage in Honduras! With 21 kids it\'s right outside of Tegucigalpa is such a wonder experience to bring light into the poor 3rd world countries I have gone on two missions trips there and hopefully going in my 3rd one soon</string>
 
 </resources>

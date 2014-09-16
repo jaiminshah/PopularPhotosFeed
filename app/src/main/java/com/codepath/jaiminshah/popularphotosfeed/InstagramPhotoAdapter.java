@@ -72,10 +72,16 @@ public class InstagramPhotoAdapter extends ArrayAdapter<InstagramPhoto> {
         DisplayMetrics displayMetrics = getContext().getResources().getDisplayMetrics();
         viewHolder.imgPhoto.getLayoutParams().height = displayMetrics.widthPixels;
 
+        Transformation transformation = new RoundedTransformationBuilder()
+                .cornerRadiusDp(10)
+                .oval(false)
+                .build();
+
         // fetch the photo
         viewHolder.imgPhoto.setImageResource(0);
         Picasso.with(getContext())
                 .load(photo.imageUrl)
+                .transform(transformation)
                 .into(viewHolder.imgPhoto);
 
         //Set time elapsed for photo

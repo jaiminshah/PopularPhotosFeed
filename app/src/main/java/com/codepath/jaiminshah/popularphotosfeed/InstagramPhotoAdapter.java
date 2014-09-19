@@ -17,6 +17,8 @@ import com.makeramen.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
+import org.apache.http.impl.conn.AbstractClientConnAdapter;
+
 import java.util.ArrayList;
 
 /**
@@ -42,7 +44,19 @@ public class InstagramPhotoAdapter extends ArrayAdapter<InstagramPhoto> {
             viewHolder.tvLikes = (TextView) convertView.findViewById(R.id.tvLikes);
             viewHolder.tvTimeElapsed = (TextView) convertView.findViewById(R.id.tvTimeElapsed);
             viewHolder.imgTime = (ImageView) convertView.findViewById(R.id.imgTime);
-            viewHolder.lvComments = (ListView)convertView.findViewById(R.id.lvComments);
+            viewHolder.llComments = (LinearLayout)convertView.findViewById(R.id.llComments);
+
+            for(Comment comment: photo.comments){
+                View line = LayoutInflater.from(getContext()).inflate(R.layout.item_comment, parent, false);
+                viewHolder.vlines.add(line);
+
+                ImageView imgComment = (ImageView) line.findViewById(R.id.imgComment);
+                viewHolder.imgComments.add(imgComment);
+
+                TextView tvComment = (TextView) line.findViewById(R.id.tvComment);
+                viewHolder.tvComments.add(tvComment);
+            }
+
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -94,9 +108,27 @@ public class InstagramPhotoAdapter extends ArrayAdapter<InstagramPhoto> {
         // Set the caption for the photo
         viewHolder.tvCaption.setText(photo.getFormattedCaption());
 
-        CommentAdapter aComments = new CommentAdapter(getContext(),photo.comments);
-        viewHolder.lvComments.setAdapter(aComments);
+        viewHolder.llComments.removeAllViews();
+        for(int i = 0; i < photo.comments.size(); i++){
+            Comment comment = photo.comments.get(i);
+            transformation = new RoundedTransformationBuilder()
+                    .borderColor(Color.LTGRAY)
+                    .borderWidthDp(1)
+                    .cornerRadiusDp(30)
+                    .oval(false)
+                    .build();
 
+            // fetch the profile picture for the user
+            Picasso.with(getContext())
+                    .load(comment.userImgUrl)
+                    .fit()
+                    .transform(transformation)
+                    .into(viewHolder.imgComments.get(i));
+
+            viewHolder.tvComments.get(i).setText(comment.getFormattedComment());
+
+            viewHolder.llComments.addView(viewHolder.vlines.get(i));
+        }
 
         return convertView;
     }
@@ -110,6 +142,9 @@ public class InstagramPhotoAdapter extends ArrayAdapter<InstagramPhoto> {
         TextView tvCaption;
         TextView tvTimeElapsed;
         ImageView imgTime;
-        ListView lvComments;
+        LinearLayout llComments;
+        ArrayList<View> vlines = new ArrayList<View>();
+        ArrayList<ImageView> imgComments = new ArrayList<ImageView>();
+        ArrayList<TextView> tvComments = new ArrayList<TextView>();
     }
 }
